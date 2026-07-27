@@ -1,5 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Client } from 'pg';
 
 import { User } from '../entities/user.entity';
 import { Order } from '../entities/order.entity';
@@ -12,6 +13,7 @@ export class UsersService {
   constructor(
     private productsService: ProductsService,
     private configservice: ConfigService,
+    @Inject('PG') private clientPg: Client,
   ) {}
 
   private counterId = 1;
