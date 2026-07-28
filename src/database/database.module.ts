@@ -11,6 +11,7 @@ const API_KEY_PROD = 'PROD734575';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
+      // Esta es la manera de conectarnos a la base de datos mediante TYPEORM
       inject: [config.KEY],
       useFactory: (configService: ConfigType<typeof config>) => {
         const { user, host, dbName, password, port } = configService.postgres;
@@ -32,9 +33,11 @@ const API_KEY_PROD = 'PROD734575';
     },
     {
       provide: 'PG',
+      // Esta es la menara nativa de conectarse a la base de datos con pg
       useFactory: (configService: ConfigType<typeof config>) => {
         const { user, host, password, port, dbName } = configService.postgres;
         const client = new Client({
+          // Creamos un nuevo cliente con toda la informacion necesaria
           user,
           host,
           database: dbName,
@@ -42,7 +45,7 @@ const API_KEY_PROD = 'PROD734575';
           port,
         });
 
-        client.connect();
+        client.connect(); // nos conectamos
         return client;
       },
       inject: [config.KEY],

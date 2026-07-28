@@ -6,21 +6,24 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
+    // Validamos que se pueda usar las validaciones de forma global
     new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
+      whitelist: true, // Habilitamos esta opcion para que elimine propiedades que no estan definidas en los DTOs.
+      forbidNonWhitelisted: true, //  lanza un error si se envian propiedades que no estan definidas en los DTOs.
     }),
   );
 
+  // Configuracion para Swagger Document
   const config = new DocumentBuilder()
+    // Creamos un nuevo documento con su titulo, descripcion.. y al final .build para construirlo
     .setTitle('API')
     .setDescription('PLATZI STORE')
     .setVersion('1.0')
     .build();
-  const documentFactory = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, documentFactory);
+  const documentFactory = SwaggerModule.createDocument(app, config); // Creamos el document config que va tener todos los endpoints de app
+  SwaggerModule.setup('docs', app, documentFactory); // Montamos el setup donde se va a poder ver ese documento
 
-  app.enableCors();
+  app.enableCors(); // Habilitamos los cors para poder recibir peticiones desde cualquier dispositivo
   await app.listen(3000);
 }
 bootstrap();

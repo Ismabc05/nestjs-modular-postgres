@@ -7,7 +7,7 @@ import config from './config';
 export class AppService {
   constructor(
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
-    @Inject('TASKS') private tasks: any[],
+    @Inject('TASKS') private tasks: any[], // @Inject inyectamos los providers
     @Inject('PG') private clientPg: Client,
   ) {}
   getHello(): string {

@@ -17,10 +17,13 @@ import config from './config';
     ProductsModule,
     DatabaseModule,
     ConfigModule.forRoot({
+      // Configuramos nuestro ConfigModule
       envFilePath: enviroments[process.env.NODE_ENV] || '.env', // Dependiendo del entorno (NODE_ENV), carga un archivo .env diferente, en caso de que no pueda devolver ninguno le enviamos el .env
-      load: [config],
-      isGlobal: true,
+      load: [config], // Carga el archivo config para poder acceder a las variables de entorno de manera mas facil
+      isGlobal: true, // Con esto le decimos que el configModule se pueda usar de manera global en cualquier modulo
       validationSchema: Joi.object({
+        // Validamos las variables de entorno al iniciar la aplicación.
+        // Si alguna falta o tiene un tipo incorrecto, NestJS no arrancará.
         API_KEY: Joi.number().required(),
         DATABASE_NAME: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
@@ -34,15 +37,14 @@ import config from './config';
   ],
   controllers: [AppController],
   providers: [
-    // Los providers son servicios que tiene un módulo
     AppService, // en realidad es el provider useClass
     {
       provide: 'TASKS',
       useFactory: async (http: HttpService) => {
-        // El provider useFactory
+        // En este provider se usa UseFactory ya que tenemos que iyectarle un servicio para devolver informacion que contiene ese servicio
         const tasks = await http
           .get('https://jsonplaceholder.typicode.com/todos')
-          .toPromise();
+          .toPromise(); // se usa una promise ya que la respuesta puede tardar porque es una peticion externa
         return tasks.data;
       },
       inject: [HttpService],

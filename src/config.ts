@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('config', () => {
+  // Es una funcion especifica de nest/config que agrupa las variables de entorno en grupos para que sea mas facil de acceder a ellas
   return {
     database: {
       name: process.env.DATABASE_NAME,
