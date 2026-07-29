@@ -13,7 +13,7 @@ export class Order {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamptz' })
   date: Date;
 
   @CreateDateColumn({
@@ -26,7 +26,7 @@ export class Order {
   @UpdateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+    name: 'updated_at',
   })
   updatedAt: Date;
   user: User;

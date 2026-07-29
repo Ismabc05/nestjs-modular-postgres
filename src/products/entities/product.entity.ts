@@ -14,7 +14,7 @@ export class Product {
   @Column({ type: 'varchar', length: 255, unique: true })
   name: string;
 
-  @Column({ type: 'text', length: 500 })
+  @Column({ type: 'text' })
   description: string;
 
   @Column({ type: 'int' })
@@ -36,7 +36,7 @@ export class Product {
   @UpdateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+    name: 'updated_at',
   })
   updatedAt: Date;
 }

@@ -27,7 +27,7 @@ export class Brand {
   @UpdateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+    name: 'updated_at',
   })
   updatedAt: Date;
 }

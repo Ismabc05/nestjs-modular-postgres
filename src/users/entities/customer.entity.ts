@@ -17,7 +17,7 @@ export class Customer {
   @Column({ type: 'varchar', length: 255, unique: true })
   lastName: string;
 
-  @Column({ type: 'int', length: 50 })
+  @Column({ type: 'int' })
   phone: string;
 
   @CreateDateColumn({
@@ -30,7 +30,7 @@ export class Customer {
   @UpdateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+    name: 'updated_at',
   })
   updatedAt: Date;
 }
