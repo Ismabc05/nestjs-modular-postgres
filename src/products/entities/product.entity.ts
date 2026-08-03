@@ -4,7 +4,10 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+
+import { Brand } from './brand.entity';
 
 @Entity()
 export class Product {
@@ -39,4 +42,9 @@ export class Product {
     name: 'updated_at',
   })
   updatedAt: Date;
+
+  @ManyToOne(() => Brand, (brand) => brand.products)
+  brand: Brand;
 }
+
+// Las relaciones Uno a Muchos tiene la clave foranea la entidad que hace referencia a muchos, en este caso la entidad Product tiene la llave foranea de Brand, por eso se pone el decorador JoinColumn en la entidad Product.
