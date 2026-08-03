@@ -4,17 +4,21 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+
+import { Customer } from './customer.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 100, unique: true })
+  @Column({ type: 'varchar', length: 100 })
   email: string;
 
-  @Column({ type: 'varchar', length: 100, unique: true })
+  @Column({ type: 'varchar', length: 100 })
   password: string;
 
   @Column({ type: 'varchar', length: 100 })
@@ -33,4 +37,10 @@ export class User {
     name: 'updated_at',
   })
   updatedAt: Date;
+
+  @OneToOne(() => Customer, (customer) => customer.user, { nullable: true })
+  @JoinColumn()
+  customer: Customer;
 }
+
+// En las relaciones Uno a Uno el que tengo el decorador JoinColumn es el que tiene la llave foranea, en este caso el usuario tiene la llave foranea de customer, por eso se pone el decorador JoinColumn en la entidad User.
