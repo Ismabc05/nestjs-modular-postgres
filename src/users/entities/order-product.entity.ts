@@ -34,7 +34,9 @@ export class OrderItem {
 
   @ManyToOne(() => Product)
   product: Product;
+  // Muchos OrderItem pueden hacer referencia al mismo Product, y cada OrderItem pertenece a un solo Product
 
   @ManyToOne(() => Order, (order) => order.orderItems)
   order: Order;
+  // Un Order puede tener muchos OrderItem, y cada OrderItem pertenece a un solo Order
 }
