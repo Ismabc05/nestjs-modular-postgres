@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { CreateOrderItemDto } from '../dtos/order-item.dto';
+import { UpdateOrderItemDto } from '../dtos/order-item.dto';
 
 import { Order } from '../entities/order.entity';
 import { OrderItem } from '../entities/order-product.entity';
@@ -28,5 +29,20 @@ export class OrderItemService {
       product,
     });
     return this.orderItemRepository.save(orderItem);
+  }
+
+  async update(id: number, data: UpdateOrderItemDto) {
+    const orderItem = await this.orderItemRepository.findOne(id);
+    const product = await this.productRepository.findOne(data.productId);
+    const updatedOrderItem = this.orderItemRepository.merge(orderItem, {
+      quantity: data.quantity,
+      product,
+    });
+    return this.orderItemRepository.save(updatedOrderItem);
+  }
+
+  async delete(id: number) {
+    const orderItem = await this.orderItemRepository.findOne(id);
+    return this.orderItemRepository.remove(orderItem);
   }
 }
