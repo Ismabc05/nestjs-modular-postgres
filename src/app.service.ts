@@ -6,7 +6,7 @@ import config from './config';
 @Injectable()
 export class AppService {
   constructor(
-    @Inject(config.KEY) private configService: ConfigType<typeof config>,
+    @Inject(config.KEY) private configService: ConfigType<typeof config>, // Inyectamos el configService para poder acceder a las variables de entorno
     @Inject('TASKS') private tasks: any[], // @Inject inyectamos los providers
     @Inject('PG') private clientPg: Client,
   ) {}
