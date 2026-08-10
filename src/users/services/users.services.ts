@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { User } from '../entities/user.entity';
-import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
+import { CreateUserDto, UpdateUserDto, FilterUserDto } from '../dtos/user.dto';
 
 import { ProductsService } from './../../products/services/products.service';
 import { CustomersService } from './customers.services';
@@ -20,7 +20,15 @@ export class UsersService {
     @InjectRepository(User) private userRepo: Repository<User>,
   ) {}
 
-  findAll() {
+  findAll(params: FilterUserDto) {
+    if (params) {
+      const { limit, offset } = params;
+      return this.userRepo.find({
+        relations: ['customer'],
+        take: limit,
+        skip: offset,
+      });
+    }
     return this.userRepo.find({
       relations: ['customer'],
     });

@@ -5,6 +5,8 @@ import {
   Length,
   IsOptional,
   IsPositive,
+  IsNumber,
+  Min,
 } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 
@@ -31,3 +33,17 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {}
+
+export class FilterUserDto {
+  @IsOptional()
+  @IsPositive()
+  @IsNumber()
+  @ApiProperty({ description: 'the limit of users to return' })
+  limit: number;
+
+  @IsOptional()
+  @Min(0)
+  @IsNumber()
+  @ApiProperty({ description: 'the offset of users to return' })
+  offset: number;
+}
