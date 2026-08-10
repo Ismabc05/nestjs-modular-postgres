@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Client } from 'pg';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, FindConditions, Like } from 'typeorm';
 
 import { User } from '../entities/user.entity';
 import { CreateUserDto, UpdateUserDto, FilterUserDto } from '../dtos/user.dto';
@@ -22,9 +22,14 @@ export class UsersService {
 
   findAll(params: FilterUserDto) {
     if (params) {
-      const { limit, offset } = params;
+      const where: FindConditions<User> = {};
+      const { limit, offset, email } = params;
+      if (email) {
+        where.email = Like(`%${email}%`);
+      }
       return this.userRepo.find({
         relations: ['customer'],
+        where,
         take: limit, // take es el limite de usuarios que quiero traer de la base de datos
         skip: offset, // skip es el numero de usuarios que quiero saltar para traer los siguientes
       });

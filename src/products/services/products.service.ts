@@ -22,8 +22,7 @@ export class ProductsService {
   findAll(params?: FilterProductsDto) {
     if (params) {
       const where: FindConditions<Product> = {};
-      const { limit, offset } = params;
-      const { minPrice, maxPrice } = params;
+      const { limit, offset, minPrice, maxPrice } = params;
       if (minPrice && maxPrice) {
         where.price = Between(minPrice, maxPrice);
       }

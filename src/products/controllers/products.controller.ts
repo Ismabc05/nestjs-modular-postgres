@@ -26,6 +26,7 @@ export class ProductsController {
 
   @Get()
   getProducts(@Query() params: FilterProductsDto) {
+    // @query() se encarga de recibir los parametros de la url.
     return this.productsService.findAll(params);
   }
 

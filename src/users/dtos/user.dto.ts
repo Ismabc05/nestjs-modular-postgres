@@ -46,4 +46,9 @@ export class FilterUserDto {
   @IsNumber()
   @ApiProperty({ description: 'the offset of users to return' })
   offset: number; // Es el numero de usuarios que quiero saltar para traer los siguientes
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ description: 'the name of user to filter' })
+  email: string;
 }
