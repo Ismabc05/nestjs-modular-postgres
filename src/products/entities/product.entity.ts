@@ -7,12 +7,14 @@ import {
   ManyToOne,
   ManyToMany,
   JoinTable,
+  Index,
 } from 'typeorm';
 
 import { Brand } from './brand.entity';
 import { Category } from './category.entity';
 
 @Entity()
+@Index(['price']) // crea un indice en la columna price para mejorar el rendimiento de las consultas que filtren por precio
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
