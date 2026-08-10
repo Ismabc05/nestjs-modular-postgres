@@ -39,11 +39,11 @@ export class FilterUserDto {
   @IsPositive()
   @IsNumber()
   @ApiProperty({ description: 'the limit of users to return' })
-  limit: number;
+  limit: number; // Es el limite de usuarios que quiero traer de la base de datos
 
   @IsOptional()
   @Min(0)
   @IsNumber()
   @ApiProperty({ description: 'the offset of users to return' })
-  offset: number;
+  offset: number; // Es el numero de usuarios que quiero saltar para traer los siguientes
 }

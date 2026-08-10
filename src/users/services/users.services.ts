@@ -25,8 +25,8 @@ export class UsersService {
       const { limit, offset } = params;
       return this.userRepo.find({
         relations: ['customer'],
-        take: limit,
-        skip: offset,
+        take: limit, // take es el limite de usuarios que quiero traer de la base de datos
+        skip: offset, // skip es el numero de usuarios que quiero saltar para traer los siguientes
       });
     }
     return this.userRepo.find({

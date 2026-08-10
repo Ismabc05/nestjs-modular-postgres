@@ -7,6 +7,7 @@ import {
   IsArray,
   IsOptional,
   Min,
+  ValidateIf,
 } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 
@@ -64,4 +65,16 @@ export class FilterProductsDto {
   @IsOptional()
   @ApiProperty({ description: 'the offset of products to return' })
   offset: number;
+
+  @IsNumber()
+  @IsPositive()
+  @IsOptional()
+  @ApiProperty({ description: 'the minimum price of products to return' })
+  minPrice: number;
+
+  @IsNumber()
+  @IsPositive()
+  @ValidateIf((item) => item.minPrice) // valida que si minPrice existe, entonces maxPrice debe ser mayor que minPrice
+  @ApiProperty({ description: 'the maximum price of products to return' })
+  maxPrice: number;
 }
