@@ -11,6 +11,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
+
 import { Brand } from './brand.entity';
 import { Category } from './category.entity';
 
@@ -36,6 +38,7 @@ export class Product {
   @Column({ type: 'varchar' })
   image: string;
 
+  @Exclude()
   @CreateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
@@ -43,6 +46,7 @@ export class Product {
   })
   createdAt: Date;
 
+  @Exclude()
   @UpdateDateColumn({
     type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP',
