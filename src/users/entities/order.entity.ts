@@ -5,12 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 import { Customer } from './customer.entity';
 import { OrderItem } from './order-product.entity';
 
-@Entity()
+@Entity({ name: 'orders' })
 export class Order {
   @PrimaryGeneratedColumn()
   id: number;
@@ -30,6 +31,7 @@ export class Order {
   updatedAt: Date;
 
   @ManyToOne(() => Customer, (customer) => customer.orders)
+  @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order)

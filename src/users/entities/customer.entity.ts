@@ -11,7 +11,7 @@ import {
 import { User } from './user.entity';
 import { Order } from './order.entity';
 
-@Entity()
+@Entity({ name: 'customers' })
 export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,7 +19,7 @@ export class Customer {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, name: 'last_name' })
   lastName: string;
 
   @Column({ type: 'varchar', length: 20 })

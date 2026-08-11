@@ -8,12 +8,13 @@ import {
   ManyToMany,
   JoinTable,
   Index,
+  JoinColumn,
 } from 'typeorm';
 
 import { Brand } from './brand.entity';
 import { Category } from './category.entity';
 
-@Entity()
+@Entity({ name: 'products' })
 @Index(['price']) // crea un indice en la columna price para mejorar el rendimiento de las consultas que filtren por precio
 // La indexacion sirve para mejorar el rendimiento de las consultas en la base de datos, ya que permite buscar registros de manera más eficiente. Sin embargo, es importante tener en cuenta que la indexación también puede afectar el rendimiento de las operaciones de escritura (inserciones, actualizaciones y eliminaciones), ya que se deben actualizar los índices cada vez que se modifica un registro. Por lo tanto, es recomendable crear índices solo en columnas que se utilicen frecuentemente en consultas y no en todas las columnas de una tabla.
 export class Product {
@@ -50,10 +51,15 @@ export class Product {
   updatedAt: Date;
 
   @ManyToOne(() => Brand, (brand) => brand.products)
+  @JoinColumn({ name: 'brand_id' })
   brand: Brand;
 
   @ManyToMany(() => Category, (category) => category.products)
-  @JoinTable()
+  @JoinTable({
+    name: 'product_categories',
+    joinColumn: { name: 'product_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'category_id', referencedColumnName: 'id' },
+  })
   categories: Category[];
 }
 
