@@ -7,13 +7,17 @@ import {
   Put,
   Delete,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CategoriesService } from '../services/categories.service';
 import { CreateCategoryDto, UpdateCategoryDto } from './../dtos/category.dtos';
+import { ApiKeyGuard } from '../../auth/guards/api-key.guard';
+import { Public } from '../../auth/decorators/public.decorator';
 
 @ApiTags('categories')
+@UseGuards(ApiKeyGuard)
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
@@ -24,6 +28,7 @@ export class CategoriesController {
   }
 
   @Get(':id')
+  @Public()
   get(@Param('id', ParseIntPipe) id: number) {
     return this.categoriesService.findOne(id);
   }
