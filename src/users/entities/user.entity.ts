@@ -20,6 +20,7 @@ export class User {
   @Column({ type: 'varchar', length: 100 })
   email: string;
 
+  @Exclude()
   @Column({ type: 'varchar', length: 100 })
   password: string;
 

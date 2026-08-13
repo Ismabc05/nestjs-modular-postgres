@@ -16,7 +16,7 @@ import { Request } from 'express';
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
   constructor(
-    private reflector: Reflector,
+    private reflector: Reflector, // lee el metadata
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
   ) {}
   // Un guardian es una clase que implementa CanActive que es una funciona que se encarga de darnos acceso al endpoint o no

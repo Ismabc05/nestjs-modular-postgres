@@ -34,6 +34,7 @@ export class UsersController {
   getOrders(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.getOrdersByUser(id);
   }
+
   @Post()
   create(@Body() payload: CreateUserDto) {
     return this.usersService.create(payload);
