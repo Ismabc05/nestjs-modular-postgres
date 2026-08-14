@@ -15,6 +15,7 @@ import { ConfigType } from '@nestjs/config';
 import { Request } from 'express';
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
+  //Los Guards en NestJS son clases que controlan si una petición tiene permiso para acceder a una ruta o endpoint.
   constructor(
     private reflector: Reflector, // lee el metadata
     @Inject(config.KEY) private configService: ConfigType<typeof config>,
