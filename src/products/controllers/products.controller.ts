@@ -7,7 +7,10 @@ import {
   Put,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { Public } from '../../auth/decorators/public.decorator';
 import { ApiTags } from '@nestjs/swagger';
 
 import { ParseIntPipe } from '../../common/parse-int.pipe';
@@ -19,17 +22,20 @@ import {
 
 import { ProductsService } from '../services/products.service';
 
+@UseGuards(JwtAuthGuard)
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
+  @Public()
   @Get()
   getProducts(@Query() params: FilterProductsDto) {
     // @query() se encarga de recibir los parametros de la url.
     return this.productsService.findAll(params);
   }
 
+  @Public()
   @Get(':productId')
   getOne(@Param('productId', ParseIntPipe) productId: number) {
     return this.productsService.findOne(productId);
