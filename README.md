@@ -1,26 +1,50 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# NestJS Modular API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST desarrollada con **NestJS**, utilizando una arquitectura modular y PostgreSQL como base de datos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+El proyecto implementa diferentes conceptos de NestJS como módulos, controladores, servicios, DTOs, Guards, Passport, autenticación mediante JWT, validaciones y relaciones entre entidades.
+
+## 🚀 Tecnologías utilizadas
+
+- **NestJS 7**
+- **TypeScript**
+- **PostgreSQL**
+- **TypeORM**
+- **Passport**
+- **Passport Local**
+- **Passport JWT**
+- **JWT**
+- **Class Validator**
+- **Swagger**
+- **Docker**
+
+## 📁 Arquitectura del proyecto
+
+El proyecto está organizado de forma modular para separar las diferentes responsabilidades de la aplicación.
+
+Entre los principales módulos se encuentran:
+
+- **Auth** → gestión de autenticación y autorización.
+- **Users** → gestión de usuarios.
+- **Customers** → gestión de clientes.
+- **Products** → gestión de productos.
+- **Categories** → gestión de categorías.
+
+Cada módulo contiene sus propios controladores, servicios, DTOs y demás elementos necesarios.
+
+## 🔐 Autenticación
+
+El proyecto utiliza **Passport** para gestionar la autenticación.
+
+Se utilizan dos estrategias principales:
+
+### Local Strategy
+
+La estrategia `local` permite autenticar a los usuarios mediante:
+
+```text
+email
+password
 
 ## Description
 
